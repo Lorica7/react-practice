@@ -1,9 +1,11 @@
+import from { BrowserRouter as Router, Route } 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Header from "./Components/Header.js"
-import { useState, useEffect  } from 'react';
 import Tasks from "./Components/Tasks"
 import AddTask from "./Components/AddTask.js";
 import Message from "./Components/Message.js"
-
+import Footer from "./Components/Footer.js";
+import About from './Components/About.js'
 
 
 const App = () => {
@@ -67,38 +69,46 @@ const App = () => {
     const taskToToggle = await fetchTask(id)
     const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder }
 
-
-    const res = await fetch(`http://locahost:5000/tasks/${id}`, {
+    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
       method: 'PUT',
       headers: {
-     
         'Content-type': 'application/json',
-        
       },
       body: JSON.stringify(updatedTask),
     })
-    const data = await res.json()
-    console.log(data)
 
-    setTasks(tasks.map((task) => task.id === id
-      ? { ...task, reminder: !data.reminder } : task
-    )
+    const data = await res.json()
+
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, reminder: data.reminder } : task
+      )
     )
   }
 
+
   return (
+    <Router>
     <div className="container">
       <Header title="Goal Getter: Tasks" onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask} />
-      {saved && <Message />}
+     
+        <Footer />
+        <Route path='/' exact render={(props) => (
+          <>
+             {saved && <Message />}
       {showAddTask &&
         <AddTask onAdd={addTask} />}
       {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}/>) :
         (
           "No Tasks to show"
        )}
-      
-    
-    </div>
+            </>
+
+        )}
+          />
+    <Route path = '/about' component={About} />
+      </div>
+      </Router>
   );
 };
 
