@@ -19,10 +19,10 @@
       "reminder": false
     },
     {
-      "text": "grocery shopping",
-      "day": "tomorrow",
-      "reminder": true,
-      "id": 5
+      "text": "code all day",
+      "day": "today",
+      "reminder": false,
+      "id": 4
     }
   ]
 }

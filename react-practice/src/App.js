@@ -1,4 +1,4 @@
-import from { BrowserRouter as Router, Route } 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Header from "./Components/Header.js"
 import Tasks from "./Components/Tasks"
@@ -92,7 +92,7 @@ const App = () => {
     <div className="container">
       <Header title="Goal Getter: Tasks" onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask} />
      
-        <Footer />
+       
         <Route path='/' exact render={(props) => (
           <>
              {saved && <Message />}
@@ -105,10 +105,12 @@ const App = () => {
             </>
 
         )}
-          />
+        />
+         <Footer />
     <Route path = '/about' component={About} />
       </div>
-      </Router>
+    </Router>
+    
   );
 };
 

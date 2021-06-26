@@ -1,3 +1,7 @@
+To get started run "npm install" to get the packages listed in the package.json. Then start the json server with "npm run server". Start the front end with "npm start" to load the React.
+
+This app makes use of functional components and uses hooks to allow the components to use state.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
